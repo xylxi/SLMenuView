@@ -30,23 +30,23 @@ public class CLItem {
 
 public struct CLMeunConfig {
     // menu背景颜色
-    let bgColor: UIColor
+    public let bgColor: UIColor
     // 添加路径的颜色
-    let rectColor: UIColor
+    public let rectColor: UIColor
     // item分割线颜色
-    let separateColor: UIColor
+    public let separateColor: UIColor
     // 按钮颜色
-    let titleColor: UIColor
+    public let titleColor: UIColor
     // 圆角半径
-    let radius: CGFloat
+    public let radius: CGFloat
     // 三角形的边长
-    let arrowLength: CGFloat
+    public let arrowLength: CGFloat
     // 按钮的高度
-    let itemHeight: CGFloat
+    public let itemHeight: CGFloat
     // 图片和文字的距离
-    let imagetitleSpace: CGFloat
+    public let imagetitleSpace: CGFloat
     // 菜单的宽带
-    var meunWidth: CGFloat
+    public var meunWidth: CGFloat
 }
 
 public class MeunView: UIView,ShowDelegate {
