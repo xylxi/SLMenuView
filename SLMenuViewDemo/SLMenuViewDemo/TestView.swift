@@ -12,7 +12,7 @@ import UIKit
 class TestView: UIView,ShowDelegate {
     weak var delegate: DisPlay?
     func al(position:SLPosition) {
-        let sh = SLShowView(addView: self, height: 100, position: position, needVisua: false)
+        let sh = SLShowView(addView: self, height: 100, position: position, needVisua: true)
         sh.show()
     }
 }

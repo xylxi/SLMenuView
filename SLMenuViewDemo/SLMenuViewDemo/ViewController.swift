@@ -32,7 +32,7 @@ class ViewController: UIViewController {
                     print(item.title);
                 }))
             }
-            let  v  = CLMeunView(items: items, direction: .downright, point: CGPoint(x: UIScreen.mainScreen().bounds.width / 2,y: UIScreen.mainScreen().bounds.height / 2 - 15), config: nil)
+            let  v  = MeunView(items: items, direction: .downright, point: CGPoint(x: UIScreen.mainScreen().bounds.width / 2,y: UIScreen.mainScreen().bounds.height / 2 - 15), config: nil)
             v.show()
     }
     

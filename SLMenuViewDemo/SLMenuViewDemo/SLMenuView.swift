@@ -49,7 +49,7 @@ public struct CLMeunConfig {
     var meunWidth: CGFloat
 }
 
-public class CLMeunView: UIView,ShowDelegate {
+public class MeunView: UIView,ShowDelegate {
     public weak var delegate : DisPlay?
     let config   : CLMeunConfig
     let items    : [CLItem]
@@ -60,7 +60,7 @@ public class CLMeunView: UIView,ShowDelegate {
         self.items     = items
         self.direction = direction
         self.point     = point
-        let bgColor = UIColor(red: CGFloat(204)/CGFloat(255), green: CGFloat(204)/CGFloat(255), blue: CGFloat(204)/CGFloat(255), alpha: 1.0)
+        let bgColor = UIColor(red: CGFloat(204)/CGFloat(255), green: CGFloat(204)/CGFloat(255), blue: CGFloat(204)/CGFloat(255), alpha: 0.2)
         let separateColor = UIColor(red: CGFloat(179)/CGFloat(255), green: CGFloat(180)/CGFloat(255), blue: CGFloat(210)/CGFloat(255), alpha: 1.0)
         self.config    = config ??
             CLMeunConfig(bgColor: bgColor, rectColor: UIColor.whiteColor(), separateColor: separateColor, titleColor: UIColor.blackColor(),radius: 5,arrowLength: 6, itemHeight: 44,imagetitleSpace: 10, meunWidth: 150)
@@ -89,18 +89,13 @@ public class CLMeunView: UIView,ShowDelegate {
         let rect = CGRectMake(x, y, w, h);
         
         super.init(frame: rect)
-        self.backgroundColor = self.config.bgColor;
+        self.backgroundColor = UIColor.clearColor()
     }
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override public func drawRect(rect: CGRect) {
-        // 背景颜色
-        let bgPath = UIBezierPath(rect: rect)
-        self.config.bgColor.set()
-        bgPath.fill()
-        
+    override public func drawRect(rect: CGRect) {        
         // 设置颜色
         self.config.rectColor.set()
         
@@ -153,6 +148,7 @@ public class CLMeunView: UIView,ShowDelegate {
             roundRect = CGRectMake(0, 0, rect.width, rect.height - self.config.arrowLength * pow(3, 0.5))
         }
         let roundPath = UIBezierPath(roundedRect: roundRect, cornerRadius: self.config.radius)
+        roundPath.addClip()
         roundPath.fill()
     }
     
@@ -173,7 +169,7 @@ public class CLMeunView: UIView,ShowDelegate {
         for (index, item) in self.items.enumerate() {
             // 按钮
             let btn = UIButton(type: .Custom)
-            btn.addTarget(self, action: #selector(CLMeunView.click(_:)), forControlEvents: .TouchUpInside)
+            btn.addTarget(self, action: #selector(MeunView.click(_:)), forControlEvents: .TouchUpInside)
             btn.frame = CGRectMake(startx, starty, self.config.meunWidth, self.config.itemHeight)
             btn.setTitle(item.title, forState: .Normal)
             btn.setTitleColor(self.config.titleColor, forState: .Normal)
