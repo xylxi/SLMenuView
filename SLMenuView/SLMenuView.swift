@@ -28,7 +28,7 @@ public class CLItem {
     }
 }
 
-public struct MeunConfig {
+public struct MenuConfig {
     // menu背景颜色
     public let bgColor: UIColor
     // 添加路径的颜色
@@ -46,43 +46,55 @@ public struct MeunConfig {
     // 图片和文字的距离
     public let imagetitleSpace: CGFloat
     // 菜单的宽带
-    public var meunWidth: CGFloat
+    public var menuWith: CGFloat
+    
+    public init(bgColor: UIColor, rectColor: UIColor, separateColor: UIColor, titleColor: UIColor, radius: CGFloat, arrowLength: CGFloat, itemHeight: CGFloat, imagetitleSpace: CGFloat, menuWidth: CGFloat) {
+        self.bgColor = bgColor
+        self.rectColor = rectColor
+        self.separateColor = separateColor
+        self.titleColor = titleColor
+        self.radius = radius
+        self.arrowLength = arrowLength
+        self.itemHeight = itemHeight
+        self.imagetitleSpace = imagetitleSpace
+        self.menuWith = menuWidth
+    }
 }
 
 public class MeunView: UIView,ShowDelegate {
     public weak var delegate : DisPlay?
-    let config   : MeunConfig
+    let config   : MenuConfig
     let items    : [CLItem]
     let direction: CLMenuDirection
     // 箭头的位置
     let point    : CGPoint
-    public init(items: [CLItem], direction: CLMenuDirection = .upleft, point: CGPoint, config: MeunConfig?) {
+    public init(items: [CLItem], direction: CLMenuDirection = .upleft, point: CGPoint, config: MenuConfig? = nil) {
         self.items     = items
         self.direction = direction
         self.point     = point
         let bgColor = UIColor(red: CGFloat(204)/CGFloat(255), green: CGFloat(204)/CGFloat(255), blue: CGFloat(204)/CGFloat(255), alpha: 0.2)
         let separateColor = UIColor(red: CGFloat(179)/CGFloat(255), green: CGFloat(180)/CGFloat(255), blue: CGFloat(210)/CGFloat(255), alpha: 1.0)
         self.config    = config ??
-            MeunConfig(bgColor: bgColor, rectColor: UIColor.whiteColor(), separateColor: separateColor, titleColor: UIColor.blackColor(),radius: 5,arrowLength: 6, itemHeight: 44,imagetitleSpace: 10, meunWidth: 150)
+            MenuConfig(bgColor: bgColor, rectColor: UIColor.whiteColor(), separateColor: separateColor, titleColor: UIColor.blackColor(),radius: 5,arrowLength: 6, itemHeight: 44,imagetitleSpace: 10, menuWidth: 150)
         // 计算高
         let h = CGFloat(items.count) * (self.config.itemHeight + 0.5) + CGFloat(self.config.arrowLength * pow(3, 0.5)) + self.config.radius
         // 计算宽
-        let w = self.config.meunWidth + self.config.radius * 2
+        let w = self.config.menuWith + self.config.radius * 2
         var x: CGFloat = 0
         var y: CGFloat = 0
         // 调整point
         switch self.direction {
         case .upleft:
-            x = point.x - self.config.meunWidth / 5
+            x = point.x - self.config.menuWith / 5
             y = point.y
         case .upright:
-            x = point.x - self.config.meunWidth / 5 * 4
+            x = point.x - self.config.menuWith / 5 * 4
             y = point.y
         case .downleft:
-            x = point.x - self.config.meunWidth / 5
+            x = point.x - self.config.menuWith / 5
             y = point.y - h
         case .downright:
-            x = point.x - self.config.meunWidth / 5 * 4
+            x = point.x - self.config.menuWith / 5 * 4
             y = point.y - h
         }
         
@@ -170,7 +182,7 @@ public class MeunView: UIView,ShowDelegate {
             // 按钮
             let btn = UIButton(type: .Custom)
             btn.addTarget(self, action: #selector(MeunView.click(_:)), forControlEvents: .TouchUpInside)
-            btn.frame = CGRectMake(startx, starty, self.config.meunWidth, self.config.itemHeight)
+            btn.frame = CGRectMake(startx, starty, self.config.menuWith, self.config.itemHeight)
             btn.setTitle(item.title, forState: .Normal)
             btn.setTitleColor(self.config.titleColor, forState: .Normal)
             if let name = item.imageName {
