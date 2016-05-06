@@ -10,13 +10,12 @@ Pod::Spec.new do |s|
 
     s.license      = 'MIT'
     s.author       = { "XYLXI" => "377793267@qq.com" }
-    s.social_media_url = "http://twitter.com/XYLXI"
-    s.source       = { :git => "https://github.com/xylxi/SLMenuView.git", :tag => s.version.to_s }
+    s.source       = { :git => "https://github.com/xylxi/SLMenuView.git", :tag => s.version }
 
     s.platform     = :ios, '8.0'
     s.requires_arc = true
 
-    s.source_files = 'SLMenuView/**/*.swift'
+    s.source_files = 'SLMenuView/*.swift'
     s.frameworks = 'Foundation', 'UIKit'
     #s.private_header_files = 'Classes/ios/private/*.h'
 end
