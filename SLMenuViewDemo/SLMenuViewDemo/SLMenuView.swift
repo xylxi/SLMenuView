@@ -9,26 +9,26 @@
 
 import UIKit
 
-enum CLMenuDirection {
+public enum CLMenuDirection {
     case upleft, upright, downleft, downright
 }
 
 public class CLItem {
     
-    typealias hClosure = (item: CLItem) -> Void
+    public typealias hClosure = (item: CLItem) -> Void
     
     let title: String
     let imageName: String?
     let handler: hClosure?
     
-    init(title: String,imageName: String? = nil , handler:hClosure?) {
+    public init(title: String,imageName: String? = nil , handler:hClosure?) {
         self.title     = title
         self.imageName = imageName
         self.handler   = handler
     }
 }
 
-struct CLMeunConfig {
+public struct CLMeunConfig {
     // menu背景颜色
     let bgColor: UIColor
     // 添加路径的颜色
@@ -56,7 +56,7 @@ public class CLMeunView: UIView,ShowDelegate {
     let direction: CLMenuDirection
     // 箭头的位置
     let point    : CGPoint
-    init(items: [CLItem], direction: CLMenuDirection = .upleft, point: CGPoint, config: CLMeunConfig?) {
+    public init(items: [CLItem], direction: CLMenuDirection = .upleft, point: CGPoint, config: CLMeunConfig?) {
         self.items     = items
         self.direction = direction
         self.point     = point
@@ -203,7 +203,7 @@ public class CLMeunView: UIView,ShowDelegate {
         delegate?.dismiss()
     }
     
-    func show() {
+    public func show() {
         // 自定义显示和隐藏动画
         let s: ShowAnimalClosure = {[weak self]
             v in

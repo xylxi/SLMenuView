@@ -31,7 +31,7 @@ public enum SLPosition {
     case Custom(ShowAnimalClosure,DismissAimalClosure)
 }
 
-class SLShowView: UIView,DisPlay {
+public class SLShowView: UIView,DisPlay {
     var dismissClosuer:(()->Void)?
     var showClosure:(()->Void)?
     
@@ -48,7 +48,7 @@ class SLShowView: UIView,DisPlay {
         return v
     }()
     
-    init(addView: ShowDelegate,height: CGFloat, position: SLPosition = .Bottom, needVisua:Bool = true) {
+    public init(addView: ShowDelegate,height: CGFloat, position: SLPosition = .Bottom, needVisua:Bool = true) {
         self.addView = addView
         self.height  = height
         self.position = position
@@ -87,11 +87,11 @@ class SLShowView: UIView,DisPlay {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func show() {
+    public func show() {
         let supV = UIApplication.sharedApplication().keyWindow!
         supV.addSubview(self)
         supV.bringSubviewToFront(self)
@@ -130,7 +130,7 @@ class SLShowView: UIView,DisPlay {
         }
         self.showClosure?()
     }
-    func dismiss() {
+    public func dismiss() {
         let addv = self.addView as! UIView
         var rect = addv.frame
         switch self.position {
