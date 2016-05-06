@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "SLMenuView"
-    s.version      = "1.1.0"
+    s.version      = "1.1.1"
     s.summary      = "一个类似QQ弹出多个选项的空间以及一个复杂View弹出的类"
     s.description  = <<-DESC
                         通过指定item的个数以及配置属性，创建弹出视图，并且可以根据枚举值，

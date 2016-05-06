@@ -57,8 +57,9 @@ public class SLShowView: UIView,DisPlay {
         if needVisua {
             self.blueView.frame = CGRectMake(0, 0, screenW, screenH)
             self.addSubview(blueView)
+        }else {
+            self.backgroundColor = UIColor(red: CGFloat(204)/CGFloat(255), green: CGFloat(204)/CGFloat(255), blue: CGFloat(204)/CGFloat(255), alpha: 0.5)
         }
-        self.backgroundColor = UIColor(red: CGFloat(204)/CGFloat(255), green: CGFloat(204)/CGFloat(255), blue: CGFloat(204)/CGFloat(255), alpha: 1.0)
         addView.delegate = self
         self.addSubview(addView as! UIView)
         // 确认x,w,h
