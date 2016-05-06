@@ -28,7 +28,7 @@ public class CLItem {
     }
 }
 
-public struct CLMeunConfig {
+public struct MeunConfig {
     // menu背景颜色
     public let bgColor: UIColor
     // 添加路径的颜色
@@ -51,19 +51,19 @@ public struct CLMeunConfig {
 
 public class MeunView: UIView,ShowDelegate {
     public weak var delegate : DisPlay?
-    let config   : CLMeunConfig
+    let config   : MeunConfig
     let items    : [CLItem]
     let direction: CLMenuDirection
     // 箭头的位置
     let point    : CGPoint
-    public init(items: [CLItem], direction: CLMenuDirection = .upleft, point: CGPoint, config: CLMeunConfig?) {
+    public init(items: [CLItem], direction: CLMenuDirection = .upleft, point: CGPoint, config: MeunConfig?) {
         self.items     = items
         self.direction = direction
         self.point     = point
         let bgColor = UIColor(red: CGFloat(204)/CGFloat(255), green: CGFloat(204)/CGFloat(255), blue: CGFloat(204)/CGFloat(255), alpha: 0.2)
         let separateColor = UIColor(red: CGFloat(179)/CGFloat(255), green: CGFloat(180)/CGFloat(255), blue: CGFloat(210)/CGFloat(255), alpha: 1.0)
         self.config    = config ??
-            CLMeunConfig(bgColor: bgColor, rectColor: UIColor.whiteColor(), separateColor: separateColor, titleColor: UIColor.blackColor(),radius: 5,arrowLength: 6, itemHeight: 44,imagetitleSpace: 10, meunWidth: 150)
+            MeunConfig(bgColor: bgColor, rectColor: UIColor.whiteColor(), separateColor: separateColor, titleColor: UIColor.blackColor(),radius: 5,arrowLength: 6, itemHeight: 44,imagetitleSpace: 10, meunWidth: 150)
         // 计算高
         let h = CGFloat(items.count) * (self.config.itemHeight + 0.5) + CGFloat(self.config.arrowLength * pow(3, 0.5)) + self.config.radius
         // 计算宽
