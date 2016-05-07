@@ -1,5 +1,5 @@
 #SLMenuView
-一个类似QQ弹出选项的空间和一个辅助View动画弹出的类
+一个类似点击QQ右上角加号弹出来的控件和一个辅助View动画弹出的类
 
 ###效果图：
 ![effect](https://github.com/xylxi/SLMenuView/blob/master/demo.gif)
@@ -71,7 +71,8 @@ use_frameworks!
 
 pod 'SLMenuView'
 ```
-
+### 有bug或者好的建议请联系我
+[Email](http://weibo.com/Wei饱饱)
 
 
 
