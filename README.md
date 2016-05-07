@@ -72,7 +72,6 @@ use_frameworks!
 pod 'SLMenuView'
 ```
 ### 有bug或者好的建议请联系我
-[Email](http://weibo.com/Wei饱饱)
 
 
 
