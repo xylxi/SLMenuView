@@ -10,8 +10,10 @@ import UIKit
 
 
 class TestView: UIView,ShowDelegate {
+    // 协议需要的代理
     weak var delegate: DisPlay?
-    func al(position:SLPosition) {
+    // 简单使用
+    func alert(position:SLPosition) {
         let sh = SLShowView(addView: self, height: 100, position: position, needVisua: true)
         sh.show()
     }

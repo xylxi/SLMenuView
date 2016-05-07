@@ -26,32 +26,35 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var btn: UIButton!
     @IBAction func click(sender: AnyObject) {
+            // 简单用法
+            let titles = ["itme1","itme2","time3","itme4","item5"]
             var items = [CLItem]()
             for i in 0..<5  {
-                items.append(CLItem(title: "haha\(i)", imageName: "love", handler: { (item) in
+                items.append(CLItem(title: titles[i], imageName: "love", handler: { (item) in
                     print(item.title);
                 }))
             }
-            let  v  = MeunView(items: items, direction: .downright, point: CGPoint(x: UIScreen.mainScreen().bounds.width / 2,y: UIScreen.mainScreen().bounds.height / 2 - 15), config: nil)
-            v.show()
+            let  menuView  = MeunView(items: items, direction: .downright, point: CGPoint(x: UIScreen.mainScreen().bounds.width / 2,y: UIScreen.mainScreen().bounds.height / 2 - 15), config: nil)
+            menuView.show()
+        
     }
     
     @IBAction func top(sender: AnyObject) {
         let s = TestView(frame: CGRectMake(100, 100, 100, 100))
         s.backgroundColor = UIColor.redColor()
-        s.al(.Top)
+        s.alert(.Top)
     }
     
     @IBAction func center(sender: AnyObject) {
         let s = TestView(frame: CGRectMake(100, 100, 100, 100))
         s.backgroundColor = UIColor.redColor()
-        s.al(.Center)
+        s.alert(.Center)
     }
     
     @IBAction func bottom(sender: AnyObject) {
         let s = TestView(frame: CGRectMake(100, 100, 100, 100))
         s.backgroundColor = UIColor.redColor()
-        s.al(.Bottom)
+        s.alert(.Bottom)
     }
 }
 
