@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8lg-vj-ays">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="vTN-Nx-2RM">
+            <objects>
+                <navigationController id="8lg-vj-ays" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a5p-7q-tQH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.070588235294117646" green="0.71764705882352942" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="wyL-rg-yCd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Lb-Rh-An6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-472" y="228"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SLMenu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SLMenuViewDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,30 +35,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubp-nF-DpT">
-                                <rect key="frame" x="275" y="285" width="51" height="30"/>
-                                <state key="normal" title="custom"/>
-                                <connections>
-                                    <action selector="click:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0M0-WL-QeY"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOw-YD-u2m">
-                                <rect key="frame" x="285" y="40" width="30" height="30"/>
-                                <state key="normal" title="Top"/>
+                                <rect key="frame" x="52" y="118" width="90" height="30"/>
+                                <state key="normal" title="从上面滑下来"/>
                                 <connections>
                                     <action selector="top:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fMS-ae-1kG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYK-mS-ubX">
-                                <rect key="frame" x="278" y="90" width="44" height="30"/>
-                                <state key="normal" title="center"/>
+                                <rect key="frame" x="52" y="187" width="60" height="30"/>
+                                <state key="normal" title="中间弹出"/>
                                 <connections>
                                     <action selector="center:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TK9-H6-aCu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NE8-xq-Rz8">
-                                <rect key="frame" x="275" y="140" width="50" height="30"/>
-                                <state key="normal" title="bottom"/>
+                                <rect key="frame" x="52" y="256" width="75" height="30"/>
+                                <state key="normal" title="从下面弹出"/>
                                 <connections>
                                     <action selector="bottom:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kbr-ek-aAV"/>
                                 </connections>
@@ -48,22 +59,33 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zYK-mS-ubX" firstAttribute="centerX" secondItem="YOw-YD-u2m" secondAttribute="centerX" id="0x9-dX-ZTt"/>
-                            <constraint firstItem="NE8-xq-Rz8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HJV-5g-kRa"/>
-                            <constraint firstItem="YOw-YD-u2m" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="KFW-09-4ti"/>
-                            <constraint firstItem="ubp-nF-DpT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NJm-fd-Lc0"/>
-                            <constraint firstItem="ubp-nF-DpT" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="TgU-9F-e1u"/>
-                            <constraint firstItem="NE8-xq-Rz8" firstAttribute="top" secondItem="zYK-mS-ubX" secondAttribute="bottom" constant="20" id="dF2-BM-g2c"/>
-                            <constraint firstItem="zYK-mS-ubX" firstAttribute="top" secondItem="YOw-YD-u2m" secondAttribute="bottom" constant="20" id="fGe-25-Po6"/>
-                            <constraint firstItem="YOw-YD-u2m" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="get-sG-Es5"/>
+                            <constraint firstItem="YOw-YD-u2m" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="54" id="Mcf-gn-Nbd"/>
+                            <constraint firstItem="NE8-xq-Rz8" firstAttribute="leading" secondItem="zYK-mS-ubX" secondAttribute="leading" id="PQo-Hn-riD"/>
+                            <constraint firstItem="YOw-YD-u2m" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="32" id="bPI-7t-j1H"/>
+                            <constraint firstItem="zYK-mS-ubX" firstAttribute="top" secondItem="YOw-YD-u2m" secondAttribute="bottom" constant="39" id="jM7-jy-fIk"/>
+                            <constraint firstItem="NE8-xq-Rz8" firstAttribute="top" secondItem="zYK-mS-ubX" secondAttribute="bottom" constant="39" id="mR6-d2-S3R"/>
+                            <constraint firstItem="zYK-mS-ubX" firstAttribute="leading" secondItem="YOw-YD-u2m" secondAttribute="leading" id="qAe-xU-tMP"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="btn" destination="ubp-nF-DpT" id="hOg-wJ-Brb"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="vtU-EI-Za8">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="D7b-mE-aZ7">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fdl-u2-wAS">
+                                <rect key="frame" x="544" y="4" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="加号"/>
+                                <connections>
+                                    <action selector="menu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kfb-jm-gQo"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="209" y="228"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="加号" width="36" height="36"/>
+    </resources>
 </document>

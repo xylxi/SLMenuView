@@ -25,19 +25,20 @@ class ViewController: UIViewController {
     }
 
     @IBOutlet weak var btn: UIButton!
-    @IBAction func click(sender: AnyObject) {
-            // 简单用法
-            let titles = ["itme1","itme2","time3","itme4","item5"]
-            var items = [CLItem]()
-            for i in 0..<5  {
-                items.append(CLItem(title: titles[i], imageName: "love", handler: { (item) in
-                    print(item.title);
-                }))
-            }
-            let  menuView  = MeunView(items: items, direction: .downright, point: CGPoint(x: UIScreen.mainScreen().bounds.width / 2,y: UIScreen.mainScreen().bounds.height / 2 - 15), config: nil)
-            menuView.show()
-        
+    
+    @IBAction func menu(sender: AnyObject) {
+        // 简单用法
+        let titles = ["创建讨论组","加好友","扫一扫","发送到电脑","付款"]
+        var items = [CLItem]()
+        for i in 0..<5  {
+            items.append(CLItem(title: titles[i], imageName: titles[i], handler: { (item) in
+                print(item.title);
+            }))
+        }
+        let  menuView  = MeunView(items: items, direction: .upright, point: CGPoint(x: UIScreen.mainScreen().bounds.width - 42,y: 60), config: nil)
+        menuView.show()
     }
+    
     
     @IBAction func top(sender: AnyObject) {
         let s = TestView(frame: CGRectMake(100, 100, 100, 100))

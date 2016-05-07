@@ -85,16 +85,16 @@ public class MeunView: UIView,ShowDelegate {
         // 调整point
         switch self.direction {
         case .upleft:
-            x = point.x - self.config.menuWith / 5
+            x = point.x - self.config.menuWith / 6
             y = point.y
         case .upright:
-            x = point.x - self.config.menuWith / 5 * 4
+            x = point.x - self.config.menuWith / 6 * 5
             y = point.y
         case .downleft:
-            x = point.x - self.config.menuWith / 5
+            x = point.x - self.config.menuWith / 6
             y = point.y - h
         case .downright:
-            x = point.x - self.config.menuWith / 5 * 4
+            x = point.x - self.config.menuWith / 6 * 4
             y = point.y - h
         }
         
@@ -116,16 +116,16 @@ public class MeunView: UIView,ShowDelegate {
         var offY = CGFloat(0)
         switch self.direction {
         case .upleft:
-            offX = rect.width / 5
+            offX = rect.width / 6
             offY = rect.origin.y
         case .upright:
-            offX = rect.width / 5 * 4
+            offX = rect.width / 6 * 5
             offY = rect.origin.y
         case .downleft:
-            offX = rect.width / 5
+            offX = rect.width / 6
             offY = rect.origin.y + rect.height - self.config.arrowLength * pow(3, 0.5)
         case .downright:
-            offX = rect.width / 5 * 4
+            offX = rect.width / 6 * 5
             offY = rect.origin.y + rect.height - self.config.arrowLength * pow(3, 0.5)
         }
         let xl = offX - self.config.arrowLength
@@ -180,7 +180,7 @@ public class MeunView: UIView,ShowDelegate {
         
         for (index, item) in self.items.enumerate() {
             // 按钮
-            let btn = UIButton(type: .Custom)
+            let btn = SLButton(type: .Custom)
             btn.addTarget(self, action: #selector(MeunView.click(_:)), forControlEvents: .TouchUpInside)
             btn.frame = CGRectMake(startx, starty, self.config.menuWith, self.config.itemHeight)
             btn.setTitle(item.title, forState: .Normal)
@@ -190,7 +190,7 @@ public class MeunView: UIView,ShowDelegate {
                 btn.setImage(UIImage(named: name), forState: .Highlighted)
             }
             self.addSubview(btn)
-            btn.addSpace(self.config.imagetitleSpace)
+//            btn.addSpace(self.config.imagetitleSpace)
             starty = CGRectGetMaxY(btn.frame)
             // 分割线
             if index != self.items.count - 1 {
@@ -234,10 +234,24 @@ public class MeunView: UIView,ShowDelegate {
         showView.show()
     }
 }
-extension UIButton {
-    func addSpace(space: CGFloat) {
-        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: space / 2, bottom: 0, right: 0)
-        self.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: space / 2)
+
+class SLButton: UIButton {
+    let scale: CGFloat = 1.0 / 3.0
+    override func imageRectForContentRect(contentRect: CGRect) -> CGRect {
+        return CGRectMake(0, 0, contentRect.width * scale, contentRect.height)
+    }
+    
+    override func titleRectForContentRect(contentRect: CGRect) -> CGRect {
+        return CGRectMake(contentRect.width * scale, 0, contentRect.width * (1 - scale), contentRect.height)
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.imageView?.contentMode = .Center
+        self.titleLabel?.textAlignment = .Left
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
