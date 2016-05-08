@@ -10,13 +10,12 @@
 import UIKit
 
 public enum CLMenuDirection {
-    case upleft, upright, downleft, downright
+    case up,down
 }
 
 public class CLItem {
     
     public typealias hClosure = (item: CLItem) -> Void
-    
     let title: String
     let imageName: String?
     let handler: hClosure?
@@ -30,34 +29,37 @@ public class CLItem {
 
 public struct MenuConfig {
     // menu背景颜色
-    public let bgColor: UIColor
+    let bgColor: UIColor
     // 添加路径的颜色
-    public let rectColor: UIColor
+    let rectColor: UIColor
     // item分割线颜色
-    public let separateColor: UIColor
+    let separateColor: UIColor
     // 按钮颜色
-    public let titleColor: UIColor
+    let titleColor: UIColor
     // 圆角半径
-    public let radius: CGFloat
+    let radius: CGFloat
     // 三角形的边长
-    public let arrowLength: CGFloat
+    let arrowLength: CGFloat
     // 按钮的高度
-    public let itemHeight: CGFloat
+    let itemHeight: CGFloat
     // 图片和文字的距离
-    public let imagetitleSpace: CGFloat
+//    public let imagetitleSpace: CGFloat
     // 菜单的宽带
-    public var menuWith: CGFloat
+    let menuWidth: CGFloat
+    // 箭头的的x对于width的百分比
+    let percentage: CGFloat
     
-    public init(bgColor: UIColor, rectColor: UIColor, separateColor: UIColor, titleColor: UIColor, radius: CGFloat, arrowLength: CGFloat, itemHeight: CGFloat, imagetitleSpace: CGFloat, menuWidth: CGFloat) {
-        self.bgColor = bgColor
-        self.rectColor = rectColor
-        self.separateColor = separateColor
-        self.titleColor = titleColor
-        self.radius = radius
-        self.arrowLength = arrowLength
-        self.itemHeight = itemHeight
-        self.imagetitleSpace = imagetitleSpace
-        self.menuWith = menuWidth
+    public init(bgColor: UIColor, rectColor: UIColor, separateColor: UIColor, titleColor: UIColor, radius: CGFloat, arrowLength: CGFloat, itemHeight: CGFloat, imagetitleSpace: CGFloat, menuWidth: CGFloat, percentage: CGFloat = CGFloat(5) / CGFloat(6)) {
+        self.bgColor         = bgColor
+        self.rectColor       = rectColor
+        self.separateColor   = separateColor
+        self.titleColor      = titleColor
+        self.radius          = radius
+        self.arrowLength     = arrowLength
+        self.itemHeight      = itemHeight
+//        self.imagetitleSpace = imagetitleSpace
+        self.menuWidth       = menuWidth
+        self.percentage      = percentage
     }
 }
 
@@ -68,7 +70,7 @@ public class MeunView: UIView,ShowDelegate {
     let direction: CLMenuDirection
     // 箭头的位置
     let point    : CGPoint
-    public init(items: [CLItem], direction: CLMenuDirection = .upleft, point: CGPoint, config: MenuConfig? = nil) {
+    public init(items: [CLItem], direction: CLMenuDirection = .up, point: CGPoint, config: MenuConfig? = nil) {
         self.items     = items
         self.direction = direction
         self.point     = point
@@ -79,22 +81,16 @@ public class MeunView: UIView,ShowDelegate {
         // 计算高
         let h = CGFloat(items.count) * (self.config.itemHeight + 0.5) + CGFloat(self.config.arrowLength * pow(3, 0.5)) + self.config.radius
         // 计算宽
-        let w = self.config.menuWith + self.config.radius * 2
+        let w = self.config.menuWidth + self.config.radius * 2
         var x: CGFloat = 0
         var y: CGFloat = 0
         // 调整point
         switch self.direction {
-        case .upleft:
-            x = point.x - self.config.menuWith / 6
+        case .up:
+            x = point.x - self.config.menuWidth * self.config.percentage
             y = point.y
-        case .upright:
-            x = point.x - self.config.menuWith / 6 * 5
-            y = point.y
-        case .downleft:
-            x = point.x - self.config.menuWith / 6
-            y = point.y - h
-        case .downright:
-            x = point.x - self.config.menuWith / 6 * 4
+        case .down:
+            x = point.x - self.config.menuWidth * self.config.percentage
             y = point.y - h
         }
         
@@ -112,20 +108,12 @@ public class MeunView: UIView,ShowDelegate {
         self.config.rectColor.set()
         
         // 设置三角
-        var offX = CGFloat(0)
+        let offX = rect.width * self.config.percentage
         var offY = CGFloat(0)
         switch self.direction {
-        case .upleft:
-            offX = rect.width / 6
+        case .up:
             offY = rect.origin.y
-        case .upright:
-            offX = rect.width / 6 * 5
-            offY = rect.origin.y
-        case .downleft:
-            offX = rect.width / 6
-            offY = rect.origin.y + rect.height - self.config.arrowLength * pow(3, 0.5)
-        case .downright:
-            offX = rect.width / 6 * 5
+        case .down:
             offY = rect.origin.y + rect.height - self.config.arrowLength * pow(3, 0.5)
         }
         let xl = offX - self.config.arrowLength
@@ -135,11 +123,11 @@ public class MeunView: UIView,ShowDelegate {
         
         var pointl:CGPoint,pointr:CGPoint,pointh:CGPoint
         switch self.direction {
-        case .upright,.upleft:
+        case .up:
             pointl = CGPoint(x: xl, y: yd)
             pointr = CGPoint(x: xr, y: yd)
             pointh = CGPoint(x: xl + self.config.arrowLength, y: yt)
-        case .downright,.downleft:
+        case .down:
             pointl = CGPoint(x: xl, y: yt)
             pointr = CGPoint(x: xr, y: yt)
             pointh = CGPoint(x: xl + self.config.arrowLength, y: yd)
@@ -154,7 +142,7 @@ public class MeunView: UIView,ShowDelegate {
         
         var roundRect: CGRect
         switch self.direction {
-        case .upleft, .upright:
+        case .up:
             roundRect = CGRectMake(0, yd, rect.width, rect.height - yd)
         default:
             roundRect = CGRectMake(0, 0, rect.width, rect.height - self.config.arrowLength * pow(3, 0.5))
@@ -174,7 +162,7 @@ public class MeunView: UIView,ShowDelegate {
         
         var starty  = margin2
         let startx  = margin2
-        if self.direction == .upright || self.direction == .upleft {
+        if self.direction == .up {
             starty += margin1
         }
         
@@ -182,7 +170,7 @@ public class MeunView: UIView,ShowDelegate {
             // 按钮
             let btn = SLButton(type: .Custom)
             btn.addTarget(self, action: #selector(MeunView.click(_:)), forControlEvents: .TouchUpInside)
-            btn.frame = CGRectMake(startx, starty, self.config.menuWith, self.config.itemHeight)
+            btn.frame = CGRectMake(startx, starty, self.config.menuWidth, self.config.itemHeight)
             btn.setTitle(item.title, forState: .Normal)
             btn.setTitleColor(self.config.titleColor, forState: .Normal)
             if let name = item.imageName {
@@ -249,7 +237,7 @@ class SLButton: UIButton {
         self.imageView?.contentMode = .Center
         self.titleLabel?.textAlignment = .Left
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

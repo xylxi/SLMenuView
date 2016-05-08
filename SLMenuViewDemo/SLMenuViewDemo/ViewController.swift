@@ -35,7 +35,7 @@ class ViewController: UIViewController {
                 print(item.title);
             }))
         }
-        let  menuView  = MeunView(items: items, direction: .upright, point: CGPoint(x: UIScreen.mainScreen().bounds.width - 42,y: 60), config: nil)
+        let  menuView  = MeunView(items: items, direction: .up, point: CGPoint(x: UIScreen.mainScreen().bounds.width - 42,y: 60), config: nil)
         menuView.show()
     }
     
