@@ -24,10 +24,11 @@
 ```
 
 ####创建菜单
-    let  menuView  = MeunView(items: items, direction: .downright, point: CGPoint(x: UIScreen.mainScreen().bounds.width / 2,y: UIScreen.mainScreen().bounds.height / 2 - 15), config: nil)
+    let  menuView  = MeunView(items: items, direction: .up, point: CGPoint(x: UIScreen.mainScreen().bounds.width / 2,y: UIScreen.mainScreen().bounds.height / 2 - 15), config: nil)
     // 弹出
     menuView.show()
 
+    public struct MenuConfig中提供let percentage: CGFloat百分比属性，设置箭头的X点相对于Width的比例
 ```
 
 ###SLShowView提供简单的弹出动画，也可以由使用者自定义动画：
